@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,10 +36,40 @@ class MainActivity : ComponentActivity() {
         setContent {
             Cat_InvaderTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    BasicComponentsScreen(modifier = Modifier.padding(innerPadding))
+                    //BasicComponentsScreen(modifier = Modifier.padding(innerPadding))
+                    EndGame(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
+    }
+}
+
+
+@Composable
+fun EndGame (modifier: Modifier = Modifier) {
+    Box(modifier = modifier.fillMaxSize()
+        .background(Color.Black),
+        contentAlignment = Alignment.Center){
+        Row(
+            modifier = modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            GatoMeteoro()
+            GatoMeteoro()
+            GatoMeteoro()
+            GatoMeteoro()
+            GatoMeteoro()
+        }
+        Text(
+            text = "GAME OVER",
+            modifier = modifier,
+            color = Color.Red,
+            textAlign = TextAlign.Center,
+            fontSize = 65.sp,
+            fontWeight = FontWeight.Bold
+        )
+
     }
 }
 
@@ -50,9 +81,48 @@ fun BasicComponentsScreen(modifier: Modifier = Modifier) {
             .background(Color(0, 0, 0, 255))
     ) {
         DadosDeJogo()
+        Row(
+            modifier = modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            GatoMeteoro()
+            GatoMeteoro()
+            GatoMeteoro()
+            GatoMeteoro()
+            GatoMeteoro()
+        }
+
+        Box(modifier = modifier.fillMaxSize(),
+            contentAlignment = Alignment.BottomCenter) {
+            Column() {
+                Nave(Color(243, 195, 74, 255),
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .size(80.dp)
+                )
+                Text(
+                    text = "PRESS START",
+                    modifier = modifier
+                        .background(Color.Gray)
+                        .fillMaxWidth()
+                        .padding(10.dp),
+                    color = Color.White,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
     }
 }
 
+@Composable
+fun GatoMeteoro( modifier: Modifier = Modifier) {
+    Image(
+        modifier = modifier.size(50.dp),
+        painter = painterResource(R.drawable.gatosorrino),
+        contentDescription = "Cat Enemy"
+    )
+}
 @Composable
 fun CatEnemy(
     color: Color,
@@ -71,7 +141,7 @@ fun CatEnemy(
 fun DadosDeJogo(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween, // Agora sim isso vai funcionar!
+        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -80,7 +150,7 @@ fun DadosDeJogo(modifier: Modifier = Modifier) {
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.SansSerif,
-            color = Color(0xFFFFFFFF) // REMOVI o fillMaxWidth daqui de dentro!
+            color = Color(0xFFFFFFFF)
         )
 
         Row(
@@ -95,26 +165,32 @@ fun DadosDeJogo(modifier: Modifier = Modifier) {
             )
             CatEnemy(
                 color = Color.Green,
-                modifier = Modifier.size(24.dp).padding(start = 4.dp)
+                modifier = Modifier
+                    .size(24.dp)
+                    .padding(start = 4.dp)
             )
             CatEnemy(
                 color = Color.Green,
-                modifier = Modifier.size(24.dp).padding(start = 4.dp)
+                modifier = Modifier
+                    .size(24.dp)
+                    .padding(start = 4.dp)
             )
             CatEnemy(
                 color = Color.Green,
-                modifier = Modifier.size(24.dp).padding(start = 4.dp)
+                modifier = Modifier
+                    .size(24.dp)
+                    .padding(start = 4.dp)
             )
-        } // Fim da Row das vidas
-    } // Fim da Row principal
+        }
+    }
 }
 
 
 @Composable
 fun Nave(
     color: Color,
-    modifier: Modifier = Modifier
-) {
+        modifier: Modifier = Modifier
+    ) {
 
     Image(
         modifier = modifier,
